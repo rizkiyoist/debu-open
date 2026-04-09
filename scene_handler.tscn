@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://beib8k7f4b00x"]
+
+[ext_resource type="Script" uid="uid://bpla2vudueu63" path="res://scene_handler.gd" id="1_8qim7"]
+[ext_resource type="PackedScene" uid="uid://4thy07nvbdlt" path="res://main_menu.tscn" id="2_qjdn2"]
+[ext_resource type="PackedScene" uid="uid://026b4bgl0e3y" path="res://mode_select.tscn" id="3_cidb5"]
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource("1_8qim7")
+main_menu_packed = ExtResource("2_qjdn2")
+mode_select_packed = ExtResource("3_cidb5")
