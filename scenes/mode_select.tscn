@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://026b4bgl0e3y"]
 
-[ext_resource type="Script" uid="uid://cpc733q8oa7ds" path="res://mode_select.gd" id="1_m1dgs"]
+[ext_resource type="Script" uid="uid://cpc733q8oa7ds" path="res://scripts/mode_select.gd" id="1_m1dgs"]
 
 [node name="ModeSelect" type="Control"]
 layout_mode = 3
@@ -35,8 +35,9 @@ text = "Level"
 layout_mode = 2
 text = "Car"
 
-[node name="Race" type="Button" parent="HBoxContainer"]
+[node name="Drive" type="Button" parent="HBoxContainer"]
 layout_mode = 2
-text = "Race"
+text = "Drive"
 
 [connection signal="pressed" from="HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="HBoxContainer/Drive" to="." method="_on_drive_pressed"]

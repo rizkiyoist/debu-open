@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1un5xduon7jh"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c3ufh"]
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpea4"]
+albedo_color = Color(0, 0, 0, 0.78039217)
+
+[sub_resource type="QuadMesh" id="QuadMesh_a5cyp"]
+material = SubResource("StandardMaterial3D_tpea4")
+size = Vector2(0.3, 0.7)
+orientation = 1
+
+[node name="SkidMark" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 100
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_c3ufh")
+draw_pass_1 = SubResource("QuadMesh_a5cyp")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 100
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_c3ufh")
+draw_pass_1 = SubResource("QuadMesh_a5cyp")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 100
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_c3ufh")
+draw_pass_1 = SubResource("QuadMesh_a5cyp")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 100
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_c3ufh")
+draw_pass_1 = SubResource("QuadMesh_a5cyp")

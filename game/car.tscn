@@ -1,0 +1,226 @@
+[gd_scene load_steps=19 format=3 uid="uid://q3b78lfitgmt"]
+
+[ext_resource type="Script" uid="uid://dnfds3wnimp5t" path="res://scripts/car.gd" id="1_o8wg6"]
+[ext_resource type="Texture2D" uid="uid://shpwy0i6v2df" path="res://textures/square.png" id="2_qccav"]
+[ext_resource type="Script" uid="uid://ctv46xb8tvxyv" path="res://scripts/suspension.gd" id="3_dp11s"]
+[ext_resource type="Script" uid="uid://c2w3igeh8euga" path="res://scripts/motor.gd" id="4_2yqmx"]
+[ext_resource type="Script" uid="uid://1tq1dvdb4i1e" path="res://scripts/car_follow_camera.gd" id="5_4xjf4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tpea4"]
+friction = 0.1
+
+[sub_resource type="Curve" id="Curve_42dj3"]
+_data = [Vector2(0, 0.75280905), 0.0, 0.0, 0, 0, Vector2(0.032608703, 1), -0.15903167, -0.15903167, 0, 0, Vector2(1, 0), -1.9812744, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_56f15"]
+_limits = [0.0, 0.5, 0.0, 0.99999]
+_data = [Vector2(0, 0.078651726), 0.0, 0.0, 0, 0, Vector2(0.29891005, 0.14606744), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.0842697), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_21bcp"]
+height = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
+albedo_color = Color(0, 0.33332524, 0.61899906, 1)
+albedo_texture = ExtResource("2_qccav")
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_3vi8l"]
+material = SubResource("StandardMaterial3D_8rhti")
+size = Vector3(1, 0.5, 3)
+
+[sub_resource type="Curve" id="Curve_tpea4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.043478265, 0.1685394), 0.37589365, 0.37589365, 0, 0, Vector2(1, 1), 2.220557, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohhpf"]
+albedo_color = Color(0.62908214, 0.62908214, 0.62908214, 1)
+albedo_texture = ExtResource("2_qccav")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_8rhti"]
+material = SubResource("StandardMaterial3D_ohhpf")
+top_radius = 0.4
+bottom_radius = 0.4
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_21bcp"]
+radius = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8wg6"]
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpea4"]
+albedo_color = Color(0, 0, 0, 0.78039217)
+
+[sub_resource type="QuadMesh" id="QuadMesh_qccav"]
+material = SubResource("StandardMaterial3D_tpea4")
+size = Vector2(0.3, 0.7)
+orientation = 1
+
+[node name="Car" type="RigidBody3D" node_paths=PackedStringArray("susps", "skid_marks")]
+process_physics_priority = -1
+mass = 1000.0
+physics_material_override = SubResource("PhysicsMaterial_tpea4")
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, 0.35)
+script = ExtResource("1_o8wg6")
+susps = [NodePath("SuspFrontLeft"), NodePath("SuspFrontRight"), NodePath("SuspRearRight"), NodePath("SuspRearLeft")]
+throttle_curve = SubResource("Curve_42dj3")
+tire_grip_curve = SubResource("Curve_56f15")
+skid_marks = [NodePath("SkidMark/GPUParticles3D"), NodePath("SkidMark/GPUParticles3D2"), NodePath("SkidMark/GPUParticles3D3"), NodePath("SkidMark/GPUParticles3D4")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.58618784, 0)
+shape = SubResource("CapsuleShape3D_21bcp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.2676367e-08, 0.2900014)
+mesh = SubResource("BoxMesh_3vi8l")
+skeleton = NodePath("../..")
+
+[node name="SuspFrontLeft" type="RayCast3D" parent="." node_paths=PackedStringArray("sc_susp")]
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+script = ExtResource("3_dp11s")
+strength_curve = SubResource("Curve_tpea4")
+sc_susp = NodePath("ShapeCast3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SuspFrontLeft"]
+process_physics_priority = -2
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8rhti")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="SuspFrontLeft"]
+process_physics_priority = -2
+shape = SubResource("SphereShape3D_21bcp")
+target_position = Vector3(0, 0, 0)
+max_results = 1
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="SuspFrontRight" type="RayCast3D" parent="." node_paths=PackedStringArray("sc_susp")]
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+script = ExtResource("3_dp11s")
+strength_curve = SubResource("Curve_tpea4")
+sc_susp = NodePath("ShapeCast3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SuspFrontRight"]
+process_physics_priority = -2
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8rhti")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="SuspFrontRight"]
+process_physics_priority = -2
+shape = SubResource("SphereShape3D_21bcp")
+target_position = Vector3(0, 0, 0)
+max_results = 1
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="SuspRearRight" type="RayCast3D" parent="." node_paths=PackedStringArray("sc_susp")]
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+script = ExtResource("3_dp11s")
+strength_curve = SubResource("Curve_tpea4")
+is_drive = true
+sc_susp = NodePath("ShapeCast3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SuspRearRight"]
+process_physics_priority = -2
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8rhti")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="SuspRearRight"]
+process_physics_priority = -2
+shape = SubResource("SphereShape3D_21bcp")
+target_position = Vector3(0, 0, 0)
+max_results = 1
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="SuspRearLeft" type="RayCast3D" parent="." node_paths=PackedStringArray("sc_susp")]
+process_physics_priority = -2
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+script = ExtResource("3_dp11s")
+strength_curve = SubResource("Curve_tpea4")
+is_drive = true
+sc_susp = NodePath("ShapeCast3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SuspRearLeft"]
+process_physics_priority = -2
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_8rhti")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="SuspRearLeft"]
+process_physics_priority = -2
+shape = SubResource("SphereShape3D_21bcp")
+target_position = Vector3(0, 0, 0)
+max_results = 1
+debug_shape_custom_color = Color(1, 0, 0, 1)
+
+[node name="Engine" type="Node3D" parent="."]
+script = ExtResource("4_2yqmx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.04013, 14.709128)
+top_level = true
+current = true
+script = ExtResource("5_4xjf4")
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.957222, 1.309103, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6683159, 0, -2.2001815)
+light_energy = 30.0
+light_indirect_energy = 10.0
+spot_range = 50.0
+spot_angle = 30.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72401047, 0, -2.2001815)
+light_energy = 30.0
+light_indirect_energy = 10.0
+spot_range = 50.0
+spot_angle = 30.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35095978, 0.51297975, 2.1503863)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35095978, 0.51297975, 2.1503863)
+light_color = Color(1, 0, 0, 1)
+
+[node name="SkidMark" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SkidMark"]
+emitting = false
+amount = 300
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_o8wg6")
+draw_pass_1 = SubResource("QuadMesh_qccav")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="SkidMark"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 300
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_o8wg6")
+draw_pass_1 = SubResource("QuadMesh_qccav")
+
+[node name="GPUParticles3D3" type="GPUParticles3D" parent="SkidMark"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 300
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_o8wg6")
+draw_pass_1 = SubResource("QuadMesh_qccav")
+
+[node name="GPUParticles3D4" type="GPUParticles3D" parent="SkidMark"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.81718445, 0.2, 0)
+emitting = false
+amount = 300
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_o8wg6")
+draw_pass_1 = SubResource("QuadMesh_qccav")

@@ -2,6 +2,7 @@ extends Node
 
 @export var main_menu_packed: PackedScene
 @export var mode_select_packed: PackedScene
+@export var proto_game_packed: PackedScene
 
 var selected_level: PackedScene
 
@@ -29,3 +30,14 @@ func load_mode_select(origin: String) -> void:
 	
 	self.add_child(mode_select)
 	mode_select.back_pressed.connect(load_main_menu)
+	mode_select.drive_pressed.connect(start_game)
+	
+
+func start_game(origin: String) -> void:
+	var kids: Array[Node] = self.get_children()
+	for kid in kids:
+		self.remove_child(kid)
+	
+	print("start")
+	var game_scene: Node3D = proto_game_packed.instantiate()
+	self.add_child(game_scene)
