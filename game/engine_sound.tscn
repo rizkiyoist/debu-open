@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://by4kky20vv1mk"]
+
+[ext_resource type="Script" uid="uid://c4lg24jyetodc" path="res://scripts/engine_sound.gd" id="1_rg1qn"]
+[ext_resource type="AudioStream" uid="uid://de08fyoa0cy3x" path="res://sound/base_engine.mp3" id="2_gk1qv"]
+
+[node name="EngineSound" type="Node"]
+script = ExtResource("1_rg1qn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_gk1qv")

@@ -18,6 +18,7 @@ class_name Car
 var throttle_applied = false
 var reverse_applied = false
 var is_braking = false
+var visual_wheel_speed = 0.0
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var throttle_wheelspin = 15 # fake more wheelspin on throttle
 var throttle_wheelspin_limit = 10.0 # speed at which to stop faking throttle wheelspin
@@ -29,6 +30,11 @@ func _physics_process(delta: float) -> void:
 	_process_controls()
 	_process_suspension()
 	_process_steering_rotation(delta)
+	_process_engine_sound()
+	
+func _process_engine_sound() -> void:
+	var pitch = $EngineSound.pitch_min + ($EngineSound.pitch_max - $EngineSound.pitch_min) * (abs(visual_wheel_speed - 0)) / (abs(max_wheel_speed - 0))
+	$EngineSound.set_pitch(pitch)
 		
 func _process_suspension() -> void:
 	var susp_id = 0
@@ -49,7 +55,7 @@ func _process_traction(susp: Suspension, susp_id: int) -> void:
 	# TODO: handle possibility of divide by zero
 	var lat_grip_factor := absf(sliding_x_speed/wheel_vel.length()) # magniture of slide
 	var wheel_speed = wheel_forward_dir.dot(wheel_vel)
-	var visual_wheel_speed = wheel_speed
+	visual_wheel_speed = wheel_speed
 	var susp_force_vector = susp.get_force_vector(self)
 	
 	

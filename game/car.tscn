@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://q3b78lfitgmt"]
+[gd_scene load_steps=20 format=3 uid="uid://q3b78lfitgmt"]
 
 [ext_resource type="Script" uid="uid://dnfds3wnimp5t" path="res://scripts/car.gd" id="1_o8wg6"]
 [ext_resource type="Texture2D" uid="uid://shpwy0i6v2df" path="res://textures/square.png" id="2_qccav"]
 [ext_resource type="Script" uid="uid://ctv46xb8tvxyv" path="res://scripts/suspension.gd" id="3_dp11s"]
 [ext_resource type="Script" uid="uid://c2w3igeh8euga" path="res://scripts/motor.gd" id="4_2yqmx"]
 [ext_resource type="Script" uid="uid://1tq1dvdb4i1e" path="res://scripts/car_follow_camera.gd" id="5_4xjf4"]
+[ext_resource type="PackedScene" uid="uid://by4kky20vv1mk" path="res://game/engine_sound.tscn" id="6_qccav"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tpea4"]
 friction = 0.1
@@ -71,11 +72,11 @@ tire_grip_curve = SubResource("Curve_56f15")
 skid_marks = [NodePath("SkidMark/GPUParticles3D"), NodePath("SkidMark/GPUParticles3D2"), NodePath("SkidMark/GPUParticles3D3"), NodePath("SkidMark/GPUParticles3D4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.58618784, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.54139423, 0)
 shape = SubResource("CapsuleShape3D_21bcp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.2676367e-08, 0.2900014)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.169424e-08, 0.26753294)
 mesh = SubResource("BoxMesh_3vi8l")
 skeleton = NodePath("../..")
 
@@ -224,3 +225,5 @@ amount = 300
 fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_o8wg6")
 draw_pass_1 = SubResource("QuadMesh_qccav")
+
+[node name="EngineSound" parent="." instance=ExtResource("6_qccav")]
