@@ -6,14 +6,17 @@ var is_holding_up: bool = false
 var is_holding_down: bool = false
 
 const min_hold_time: float = 1.0
-const pitch_min = 0.4
+const pitch_min = 1.0
 const pitch_max = 4.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AudioStreamPlayer.pitch_scale = pitch_min
-	$AudioStreamPlayer.play()
-
+	var audio_count = $AudioStreamPlayer.max_polyphony
+	var timing: float = (1000/4) / audio_count
+	for i in range($AudioStreamPlayer.max_polyphony):
+			await get_tree().create_timer(timing/1000).timeout
+			$AudioStreamPlayer.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -40,6 +43,6 @@ func down_pitch(delta: float) -> void:
 	if $AudioStreamPlayer.pitch_scale > pitch_min:
 		$AudioStreamPlayer.pitch_scale = $AudioStreamPlayer.pitch_scale - delta
 
-func set_pitch(speed: float) -> void:
-	if $AudioStreamPlayer.pitch_scale > pitch_min && $AudioStreamPlayer.pitch_scale < pitch_max:
-		$AudioStreamPlayer.pitch_scale = speed
+func set_pitch(pitch: float) -> void:
+	if pitch > pitch_min && pitch < pitch_max:
+		$AudioStreamPlayer.pitch_scale = pitch

@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	
 func _process_engine_sound() -> void:
 	var pitch = $EngineSound.pitch_min + ($EngineSound.pitch_max - $EngineSound.pitch_min) * (abs(visual_wheel_speed - 0)) / (abs(max_wheel_speed - 0))
+	print(pitch)
 	$EngineSound.set_pitch(pitch)
 		
 func _process_suspension() -> void:
