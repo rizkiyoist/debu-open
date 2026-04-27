@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://by4kky20vv1mk"]
 
 [ext_resource type="Script" uid="uid://c4lg24jyetodc" path="res://scripts/engine_sound.gd" id="1_rg1qn"]
-[ext_resource type="AudioStream" uid="uid://brc5hnov0vqua" path="res://sound/single3.wav" id="2_gk1qv"]
+[ext_resource type="AudioStream" uid="uid://b5sv5q8vnyqug" path="res://sound/single3-240.wav" id="2_gk1qv"]
 
 [node name="EngineSound" type="Node"]
 script = ExtResource("1_rg1qn")
@@ -9,4 +9,4 @@ script = ExtResource("1_rg1qn")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 process_priority = -4
 stream = ExtResource("2_gk1qv")
-max_polyphony = 2
+max_polyphony = 4

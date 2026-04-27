@@ -2,7 +2,7 @@ extends RigidBody3D
 class_name Car
 
 @export var susps: Array[Suspension]
-@export var throttle_force = 5000
+@export var throttle_force = 6000
 @export var reverse_force = 2000
 @export var brake_force = 3000
 @export var max_wheel_speed = 60.0
@@ -11,8 +11,8 @@ class_name Car
 @export var tire_grip_curve: Curve
 
 # maybe move this to susp?
-@export var wheel_turn_speed = 4.0 # radian
-@export var wheel_max_turn_deg := 15
+@export var wheel_turn_speed = 5.0 # radian
+@export var wheel_max_turn_deg := 20
 @export var skid_marks : Array[GPUParticles3D]
 
 var throttle_applied = false
@@ -34,7 +34,6 @@ func _physics_process(delta: float) -> void:
 	
 func _process_engine_sound() -> void:
 	var pitch = $EngineSound.pitch_min + ($EngineSound.pitch_max - $EngineSound.pitch_min) * (abs(visual_wheel_speed - 0)) / (abs(max_wheel_speed - 0))
-	print(pitch)
 	$EngineSound.set_pitch(pitch)
 		
 func _process_suspension() -> void:
