@@ -10,6 +10,8 @@ class_name Car
 @export var throttle_curve: Curve
 @export var tire_grip_curve: Curve
 
+@onready var engine_sound = $Camera3D/EngineSound
+
 # maybe move this to susp?
 @export var wheel_turn_speed = 5.0 # radian
 @export var wheel_max_turn_deg := 20
@@ -25,6 +27,7 @@ var throttle_wheelspin_limit = 10.0 # speed at which to stop faking throttle whe
 var brake_wheellock = 15 # fake brake locking effect
 var susp_detected_max_force : Vector3
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	_process_controls()
@@ -33,8 +36,8 @@ func _physics_process(delta: float) -> void:
 	_process_engine_sound()
 	
 func _process_engine_sound() -> void:
-	var pitch = $EngineSound.pitch_min + ($EngineSound.pitch_max - $EngineSound.pitch_min) * (abs(visual_wheel_speed - 0)) / (abs(max_wheel_speed - 0))
-	$EngineSound.set_pitch(pitch)
+	var pitch = engine_sound.pitch_min + (engine_sound.pitch_max - engine_sound.pitch_min) * (abs(visual_wheel_speed - 0)) / (abs(max_wheel_speed - 0))
+	engine_sound.set_pitch(pitch)
 		
 func _process_suspension() -> void:
 	var susp_id = 0

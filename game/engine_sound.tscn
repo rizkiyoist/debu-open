@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://c4lg24jyetodc" path="res://scripts/engine_sound.gd" id="1_rg1qn"]
 [ext_resource type="AudioStream" uid="uid://b5sv5q8vnyqug" path="res://sound/single3-240.wav" id="2_gk1qv"]
 
-[node name="EngineSound" type="Node"]
+[node name="EngineSound" type="Node3D"]
 script = ExtResource("1_rg1qn")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 process_priority = -4
 stream = ExtResource("2_gk1qv")
-max_polyphony = 4
