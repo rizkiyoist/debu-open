@@ -3,11 +3,21 @@ extends Node
 @export var main_menu_packed: PackedScene
 @export var mode_select_packed: PackedScene
 @export var proto_game_packed: PackedScene
+@export var track1: PackedScene
+@export var car1: PackedScene
 
 var selected_level: PackedScene
 
 func _ready() -> void:
-	load_main_menu("init")
+	#load_main_menu("init")
+	trial_spawn()
+	
+func trial_spawn() -> void:
+	var track: Node3D = track1.instantiate()
+	var car: Node3D = car1.instantiate()
+	self.add_child(track)
+	self.add_child(car)
+	
 
 
 func load_main_menu(origin: String) -> void:
