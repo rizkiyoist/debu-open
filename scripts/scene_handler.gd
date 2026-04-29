@@ -5,6 +5,7 @@ extends Node
 @export var proto_game_packed: PackedScene
 @export var track1: PackedScene
 @export var car1: PackedScene
+@export var blenderbox: PackedScene
 
 var selected_level: PackedScene
 
@@ -15,10 +16,12 @@ func _ready() -> void:
 func trial_spawn() -> void:
 	var track: Node3D = track1.instantiate()
 	var car: Node3D = car1.instantiate()
+	var box: Node3D = blenderbox.instantiate()
 	self.add_child(track)
 	self.add_child(car)
+	self.add_child(box)
+	print(self.get_children())
 	
-
 
 func load_main_menu(origin: String) -> void:
 	var main_menu: Control = main_menu_packed.instantiate()
