@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cy1u2enq5lv2e"]
 
-[ext_resource type="PackedScene" uid="uid://cm00b3cidqxq5" path="res://game/gym.tscn" id="1_y78wq"]
+[ext_resource type="PackedScene" uid="uid://qqujhv07q2d" path="res://game/gym.tscn" id="1_y78wq"]
 [ext_resource type="PackedScene" uid="uid://q3b78lfitgmt" path="res://game/car.tscn" id="2_no6u8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lm34a"]
@@ -32,7 +32,7 @@ environment = SubResource("Environment_ccke7")
 transform = Transform3D(-6.181724e-08, 0.70710677, -0.7071068, -3.1405087e-15, 0.7071068, 0.7071067, 1, 4.371139e-08, -4.3711392e-08, 0, 41.183784, 0)
 shadow_enabled = true
 
-[node name="Gym" parent="." instance=ExtResource("1_y78wq")]
-
 [node name="Car" parent="." instance=ExtResource("2_no6u8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Ground" parent="." instance=ExtResource("1_y78wq")]

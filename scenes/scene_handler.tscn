@@ -4,15 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://4thy07nvbdlt" path="res://scenes/main_menu.tscn" id="2_qjdn2"]
 [ext_resource type="PackedScene" uid="uid://026b4bgl0e3y" path="res://scenes/mode_select.tscn" id="3_cidb5"]
 [ext_resource type="PackedScene" uid="uid://cy1u2enq5lv2e" path="res://game/base.tscn" id="4_cidb5"]
-[ext_resource type="PackedScene" uid="uid://0cv8uqnrwqjj" path="res://game/track1.tscn" id="5_dkj5u"]
+[ext_resource type="PackedScene" uid="uid://csvp5c60j7sb7" path="res://models/generatedterraintest.blend" id="5_dkj5u"]
 [ext_resource type="PackedScene" uid="uid://q3b78lfitgmt" path="res://game/car.tscn" id="6_kfsol"]
-[ext_resource type="PackedScene" uid="uid://s5arjne5o2ag" path="res://models/boxtest.blend" id="7_kfsol"]
+[ext_resource type="PackedScene" uid="uid://bar4kyy1r62im" path="res://game/directional_light.tscn" id="7_kfsol"]
 
 [node name="SceneHandler" type="Node"]
 script = ExtResource("1_8qim7")
 main_menu_packed = ExtResource("2_qjdn2")
 mode_select_packed = ExtResource("3_cidb5")
 proto_game_packed = ExtResource("4_cidb5")
-track1 = ExtResource("5_dkj5u")
-car1 = ExtResource("6_kfsol")
-blenderbox = ExtResource("7_kfsol")
+track_scene = ExtResource("5_dkj5u")
+car_scene = ExtResource("6_kfsol")
+directional_light = ExtResource("7_kfsol")

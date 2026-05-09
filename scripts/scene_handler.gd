@@ -3,9 +3,9 @@ extends Node
 @export var main_menu_packed: PackedScene
 @export var mode_select_packed: PackedScene
 @export var proto_game_packed: PackedScene
-@export var track1: PackedScene
-@export var car1: PackedScene
-@export var blenderbox: PackedScene
+@export var track_scene: PackedScene
+@export var car_scene: PackedScene
+@export var directional_light: PackedScene
 
 var selected_level: PackedScene
 
@@ -14,12 +14,15 @@ func _ready() -> void:
 	trial_spawn()
 	
 func trial_spawn() -> void:
-	var track: Node3D = track1.instantiate()
-	var car: Node3D = car1.instantiate()
-	var box: Node3D = blenderbox.instantiate()
+	var track: Node3D = track_scene.instantiate()
+	var car: Node3D = car_scene.instantiate()
+	var sun: Node3D = directional_light.instantiate()
+	
+	car.global_position.y = 1
+	
 	self.add_child(track)
 	self.add_child(car)
-	self.add_child(box)
+	self.add_child(sun)
 	print(self.get_children())
 	
 

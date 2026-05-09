@@ -19,8 +19,8 @@ _limits = [0.0, 0.5, 0.0, 0.99999]
 _data = [Vector2(0, 0.078651726), 0.0, 0.0, 0, 0, Vector2(0.29891005, 0.14606744), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.0842697), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_21bcp"]
-height = 3.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_qccav"]
+size = Vector3(2.5, 1, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8rhti"]
 albedo_color = Color(0, 0.33332524, 0.61899906, 1)
@@ -72,13 +72,12 @@ tire_grip_curve = SubResource("Curve_56f15")
 skid_marks = [NodePath("SkidMark/GPUParticles3D"), NodePath("SkidMark/GPUParticles3D2"), NodePath("SkidMark/GPUParticles3D3"), NodePath("SkidMark/GPUParticles3D4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.54139423, 0)
-shape = SubResource("CapsuleShape3D_21bcp")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57874477, 3.5527137e-15)
+shape = SubResource("BoxShape3D_qccav")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1.169424e-08, 0.26753294)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2738613, 3.5527137e-15)
 mesh = SubResource("BoxMesh_3vi8l")
-skeleton = NodePath("../..")
 
 [node name="SuspFrontLeft" type="RayCast3D" parent="." node_paths=PackedStringArray("sc_susp")]
 process_physics_priority = -2
