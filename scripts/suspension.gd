@@ -19,7 +19,7 @@ func _ready() -> void:
 		sc_susp.add_exception(get_parent())
 
 func get_force_vector(rb: RigidBody3D) -> Vector3:
-	if is_colliding() or sc_susp.is_colliding():
+	if is_colliding() or sc_susp.is_colliding():		
 		target_position.y = -length
 		var contact : Vector3
 		if sc_susp:
@@ -32,7 +32,9 @@ func get_force_vector(rb: RigidBody3D) -> Vector3:
 			print("using raycast")
 			contact = get_collision_point()
 			
-		var current_length := global_position.distance_to(contact)
+		#var current_length := global_position.distance_to(contact)
+		var contact_local : Vector3 = to_local(contact)
+		var current_length : float = absf(contact_local.y)
 		var offset = length - current_length
 		
 		var up_dir := global_basis.y
@@ -40,7 +42,15 @@ func get_force_vector(rb: RigidBody3D) -> Vector3:
 		var relative_vel := up_dir.dot(velocity)
 		
 		var offset_multiplier = strength_curve.sample_baked(offset)
-		var force_vector = ((strength * offset * offset_multiplier) - (damping * relative_vel)) * up_dir
+		
+
+		var impact_damping = damping
+		
+		#handle impact velocity but this feels weirdly dampy
+		#var compression_ratio: float = offset / length
+		#var impact_damping = damping * (1.0 + compression_ratio * 10.0)
+		
+		var force_vector = ((strength * offset * offset_multiplier) - (impact_damping * relative_vel)) * up_dir
 		
 		# wheel position
 		wheel.position.y = -(current_length - wheel_radius)

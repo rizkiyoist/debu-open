@@ -32,7 +32,7 @@ material = SubResource("StandardMaterial3D_8rhti")
 size = Vector3(1, 0.5, 3)
 
 [sub_resource type="Curve" id="Curve_tpea4"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.043478265, 0.1685394), 0.37589365, 0.37589365, 0, 0, Vector2(1, 1), 2.220557, 0.0, 0, 0]
+_data = [Vector2(0, 0), -5.091609, 0.0, 0, 0, Vector2(0.043478265, 0.1685394), 0.37589365, 0.37589365, 0, 0, Vector2(1, 1), 2.220557, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohhpf"]
@@ -72,7 +72,7 @@ tire_grip_curve = SubResource("Curve_56f15")
 skid_marks = [NodePath("SkidMark/GPUParticles3D"), NodePath("SkidMark/GPUParticles3D2"), NodePath("SkidMark/GPUParticles3D3"), NodePath("SkidMark/GPUParticles3D4")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57874477, 3.5527137e-15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5633991, 3.5527137e-15)
 shape = SubResource("BoxShape3D_qccav")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
