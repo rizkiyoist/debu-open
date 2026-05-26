@@ -3,7 +3,7 @@ class_name Suspension
 
 @export var strength = 100000
 @export var strength_curve : Curve
-@export var damping = 2000
+@export var damping = 4000
 @export var length = 0.4
 @export var wheel_radius: float = 0.4
 @export var is_drive = false

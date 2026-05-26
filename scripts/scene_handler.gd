@@ -17,12 +17,15 @@ func trial_spawn() -> void:
 	var track: Node3D = track_scene.instantiate()
 	var car: Node3D = car_scene.instantiate()
 	var sun: Node3D = directional_light.instantiate()
-	
-	car.global_position.y = 10
-	
+
 	self.add_child(track)
 	self.add_child(car)
 	self.add_child(sun)
+	
+	var spawn_point = track.find_child("SpawnTest")
+	
+#	global_transform is the same as global_position + global_rotation
+	car.global_transform = spawn_point.global_transform
 	print(self.get_children())
 	
 
