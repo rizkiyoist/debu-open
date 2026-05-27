@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://4thy07nvbdlt" path="res://scenes/main_menu.tscn" id="2_qjdn2"]
 [ext_resource type="PackedScene" uid="uid://026b4bgl0e3y" path="res://scenes/mode_select.tscn" id="3_cidb5"]
 [ext_resource type="PackedScene" uid="uid://cy1u2enq5lv2e" path="res://game/base.tscn" id="4_cidb5"]
-[ext_resource type="PackedScene" uid="uid://d0hk7dewr50vo" path="res://models/geometry nodes curved road.blend" id="5_kfsol"]
+[ext_resource type="PackedScene" uid="uid://cl3fdcu0bqdn4" path="res://models/testtopo.blend" id="5_kfsol"]
 [ext_resource type="PackedScene" uid="uid://q3b78lfitgmt" path="res://game/car.tscn" id="6_kfsol"]
 [ext_resource type="PackedScene" uid="uid://bar4kyy1r62im" path="res://game/directional_light.tscn" id="7_kfsol"]
 
