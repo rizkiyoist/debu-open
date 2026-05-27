@@ -22,7 +22,7 @@ func trial_spawn() -> void:
 	self.add_child(car)
 	self.add_child(sun)
 	
-	var spawn_point = track.find_child("SpawnTest")
+	var spawn_point = track.find_child("Player1")
 	
 #	global_transform is the same as global_position + global_rotation
 	car.global_transform = spawn_point.global_transform
