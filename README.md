@@ -1,4 +1,4 @@
-This repo is based on Godot game engine.
+This is a prototype of a sim-arcade car game made in Godot game engine.
 
 The driving engine is initially based on Octodemy's tutorial for raycast based car engine https://www.youtube.com/@octodemy, except this one is leaning towards a more sim-arcade / sim-adjacent feel.
 
